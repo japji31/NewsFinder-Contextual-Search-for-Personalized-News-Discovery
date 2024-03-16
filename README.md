@@ -5,11 +5,9 @@ As a reader, I often struggle to find the most relevant news articles using trad
 
 Realizing the limitations of keyword-based search, I became intrigued by the idea of contextual search, which takes into account the context and meaning of my search queries to deliver more precise results. Inspired by advancements in natural language processing and machine learning, I set out to build a contextual search system specifically tailored for news articles.
 
-Utilizing cutting-edge technologies like Cohere's Large Language Model and a vector database, I embarked on a journey to revolutionize the way news is discovered online. My goal was to create a system that not only understands the topics I'm interested in but also identifies the most relevant news articles based on the context of my query.
+I embarked on a journey to revolutionize the way news is discovered online. My goal was to create a system that not only understands the topics I'm interested in but also identifies the most relevant news articles based on the context of my query.
 
 ## Process
-
-The process begins by summarizing vast amounts of news articles using Cohere's Large Language Model. These summaries are then tokenized and stored in a vector database, allowing for efficient retrieval of relevant articles.
 
 When a user enters a query, the system analyzes the context and meaning behind the query using advanced natural language processing techniques. It then compares the query against the tokenized summaries in the vector database to identify the most relevant news articles.
 
