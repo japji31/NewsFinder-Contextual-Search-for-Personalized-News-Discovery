@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Service Demo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">ML Service Demo</h1>
+        <form id="queryForm" class="mt-4">
+            <div class="form-group">
+                <label for="userQuery">Enter your query:</label>
+                <input type="text" class="form-control" id="userQuery" name="userQuery" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <div id="resultContainer" class="mt-4">
+            <!-- Results will be displayed here -->
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Handle form submission
+            $('#queryForm').submit(function(event) {
+                event.preventDefault(); // Prevent the form from submitting normally
+
+                // Get user query from the input field
+                var userQuery = $('#userQuery').val();
+
+                // Get CSRF token
+                var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+
+                // Send AJAX request to your ML service endpoint
+                $.ajax({
+                    type: 'POST',
+                    url: '/user_ml/', // Update this with the URL to your user_ml view
+                    headers: { 'X-CSRFToken': csrftoken }, // Include CSRF token in headers
+                    data: { user_query: userQuery },
+                    success: function(response) {
+                        // Display the JSON response in the result container
+                        $('#resultContainer').html('<h3>Results:</h3>');
+                        for (var i = 0; i < response.similar_news.length; i++) {
+                            $('#resultContainer').append('<p>' + response.similar_news[i] + '</p>');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error
+                        console.error(error);
+                        $('#resultContainer').html('<div class="alert alert-danger">An error occurred. Please try again.</div>');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
