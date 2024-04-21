@@ -1,16 +1,14 @@
-"""
-ASGI config for news_search_django project.
-
-It exposes the ASGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/5.0/howto/deployment/asgi/
-"""
-
+from django.urls import path
+from channels.routing import ProtocolTypeRouter, URLRouter
+from chat.consumers import ChatConsumer
+from django.core.asgi import get_asgi_application
 import os
 
-from django.core.asgi import get_asgi_application
-
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'news_search_django.settings')
-
 application = get_asgi_application()
+
+application = ProtocolTypeRouter({
+    'websocket': URLRouter([
+            path('ws/chatbot/', ChatConsumer),
+        ])
+})
