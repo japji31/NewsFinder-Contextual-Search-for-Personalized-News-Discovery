@@ -22,5 +22,5 @@ def virtual_assistant(user_input):
   except Exception as e:
     return {
           "status": 500,
-          "error": e 
+          "message": e 
         }

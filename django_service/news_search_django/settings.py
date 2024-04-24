@@ -72,7 +72,7 @@ TEMPLATES = [
     },
 ]
 
-# WSGI_APPLICATION = 'news_search_django.wsgi.application'
+WSGI_APPLICATION = 'news_search_django.wsgi.application'
 ASGI_APPLICATION = 'news_search_django.asgi.application'
 CHANNEL_LAYERS = {
     'default': {
