@@ -15,6 +15,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from .task import add_data,embedding_create
 
 
 def user_signup(request):
@@ -80,3 +81,9 @@ def user_ml(request):
         
         return JsonResponse(response_data)
     return render(request, 'news.html')
+
+
+def cron(request):
+    add_data.delay()
+    embedding_create.delay()
+    return HttpResponse("DONE")

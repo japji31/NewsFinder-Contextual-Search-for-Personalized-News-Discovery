@@ -22,13 +22,14 @@ for topic_document in news_collection.find():
     topic = topic_document['Topic']
     data = topic_document['Data']
     for news_item in data:
-        content = news_item['content']
-        
-        # Generate embedding for the title
-        embedding = model.encode(content)
-        
-        # Add the embedding to the news item
-        news_item['vector'] = embedding.tolist()
+        if 'vector' not in news_item:
+            content = news_item['content']
+            
+            # Generate embedding for the content
+            embedding = model.encode(content)
+            
+            # Add the embedding to the news item
+            news_item['vector'] = embedding.tolist()
 
     # Update the news document with the embeddings
     news_collection.update_one({'_id': topic_document['_id']}, {'$set': {'Data': data}})

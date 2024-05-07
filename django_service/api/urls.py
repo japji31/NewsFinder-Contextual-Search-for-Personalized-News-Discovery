@@ -5,4 +5,6 @@ urlpatterns = [
     path('signup/', views.user_signup, name="signup"),
     path('login/', views.user_login, name="login"),
     path('news/', views.user_ml, name="user_ml"),
+    path('update/', views.cron, name="update_data"),
+
 ]

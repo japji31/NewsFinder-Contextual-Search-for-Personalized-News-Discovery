@@ -1,7 +1,7 @@
 import os
 import json
 from dotenv import load_dotenv
-from newsapi import NewsApiClient
+from newsapi.newsapi_client import NewsApiClient
 from pymongo import MongoClient
 
 # Load environment variables from .env file
@@ -18,7 +18,7 @@ client = MongoClient(connection_string)
 db = client['ContextualSearch']  
 news_collection = db['news']
 
-topics = ["machinelearning", "technology", "science", "business", "health", "startups"]
+topics = ["finance","russia","elections"]
 
 structured_data = []
 
